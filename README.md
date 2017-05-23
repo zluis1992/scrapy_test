@@ -1,2 +1,2 @@
-# scrapy_test
-prueba del uso de web scrapy usando selenium en python
+# scraping_test
+prueba del uso de web scraping usando selenium en python
