@@ -1,12 +1,20 @@
 from selenium import webdriver
 
 import time
+import platform
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 
-path_to_chromedriver = "chromedriver\chromedriver.exe"
+plataforma = platform.system()
+
+if plataforma == "Darwin":
+	path_to_chromedriver = "chromedriver/chromedriver"
+elif plataforma == "Windows":
+	path_to_chromedriver = "chromedriver\chromedriver.exe"
+
+
 browser = webdriver.Chrome(executable_path = path_to_chromedriver)
 
 #aca escogemos la pagina que queremos hacer usar scraping
