@@ -35,6 +35,7 @@ browser.find_element_by_id('identifierNext').click()
 #esperamos que cargue el form del password y luego los digitamos y damos enter.
 wait = WebDriverWait(browser, 1000)
 element = wait.until(EC.element_to_be_clickable((By.ID, 'passwordNext')))
+time.sleep(0.5)
 browser.find_element_by_css_selector('.whsOnd.zHQkBf').click()
 browser.find_element_by_css_selector('.whsOnd.zHQkBf').send_keys('#NoTengoNada123')
 browser.find_element_by_css_selector('.whsOnd.zHQkBf').send_keys(u'\ue007')
@@ -79,8 +80,23 @@ for x in xrange(1, 5):
 	time.sleep(0.5)
 
 resultado = browser.find_elements_by_css_selector('.yt-uix-sessionlink.yt-uix-tile-link.spf-link.yt-ui-ellipsis.yt-ui-ellipsis-2')
-for p in resultado : print p.get_attribute('title')
+for p in resultado :
+	# print p.get_attribute('title')
 
+	browser.get(p.get_attribute('href'))
+	wait = WebDriverWait(browser, 1000)
+	element = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, '.watch-view-count')))
+
+	for x in xrange(1, 2):
+		browser.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+		time.sleep(0.5)
+
+	# Se seleccciona el cuadro de comentarios, se escribe el comentario y se envía
+	browser.find_element_by_css_selector('.comment-simplebox-renderer-collapsed-content').click()
+	browser.find_element_by_css_selector('.comment-simplebox-text').send_keys('Buen video')
+	browser.find_element_by_css_selector('.yt-uix-button.yt-uix-button-size-default.yt-uix-button-primary.yt-uix-button-empty.comment-simplebox-submit.yt-uix-sessionlink').click()
+
+	time.sleep(10)
 
 #aca simplemente tomamos un elemento del que tenemos y lo volvemos a mandar a buscarlo
 #wait = WebDriverWait(browser, 10000)
