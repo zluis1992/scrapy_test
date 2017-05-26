@@ -5,7 +5,7 @@ import platform
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import TimeoutException
+from selenium.common.exceptions import ElementNotVisibleException
 
 plataforma = platform.system()
 
@@ -69,9 +69,9 @@ element = wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="channel-nav
 #aca le doy clic al boton subscribirse, se debe ahora para pruebas anular la subscripcion antes de volver a correr el script
 
 try:
-    browser.find_element_by_css_selector('.subscribe-label').click()
-except ValueError:
-    print('entre al boton que esta ya subscrito')
+	browser.find_element_by_css_selector('.subscribe-label').click()
+except ElementNotVisibleException:
+	print('entre al boton que esta ya subscrito')
 
 
 #browser.find_element_by_css_selector('.subscribe-label').click()
@@ -106,6 +106,12 @@ for p in resultado2 :
 		time.sleep(0.5) #espera un tiempo que sino no carga el cuadro de los comentarios
 		browser.execute_script("window.scrollTo(0, 0);")
 
+	# Se da like al video
+	try:
+		browser.find_element_by_css_selector('.yt-uix-button.yt-uix-button-size-default.yt-uix-button-opacity.yt-uix-button-has-icon.no-icon-markup.like-button-renderer-like-button.like-button-renderer-like-button-unclicked.yt-uix-post-anchor.yt-uix-tooltip').click()
+	except ElementNotVisibleException:
+		print('Ya se dio like anteriormente')
+	
 	# Se seleccciona el cuadro de comentarios, se escribe el comentario y se envia
 	browser.find_element_by_css_selector('.comment-simplebox-renderer-collapsed-content').click()
 	browser.find_element_by_css_selector('.comment-simplebox-text').send_keys('Buen video')
