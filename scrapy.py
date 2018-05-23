@@ -13,6 +13,8 @@ if plataforma == "Darwin":
 	path_to_chromedriver = "chromedriver/chromedriver"
 elif plataforma == "Windows":
 	path_to_chromedriver = "chromedriver\chromedriver.exe"
+elif plataforma == "Linux":
+	path_to_chromedriver = "chromedriver/chromedriver-linux"
 
 
 browser = webdriver.Chrome(executable_path = path_to_chromedriver)
